@@ -318,7 +318,7 @@
     }
 
     function closeWebView() {
-      try { webkit.messageHandlers.cordova_iab.postMessage(JSON.stringify({ action: 'close' })); } catch(e) { window.close(); }
+      window.parent.postMessage({ action: 'close' }, '*');
     }
   </script>
 </body>
