@@ -165,58 +165,64 @@
 
   <script>
     function getParam(key, fallback) {
-      var val = new URLSearchParams(location.search).get(key);
-      return val !== null ? decodeURIComponent(val) : fallback;
+      try {
+        var val = new URLSearchParams(location.search).get(key);
+        return val !== null ? val : fallback;
+      } catch(e) { return fallback; }
     }
 
-    var insurer    = getParam('insurer',  'KB손해보험');
-    var product    = getParam('product',  'KB손해보험 다이렉트 자동차보험');
-    var monthly    = getParam('monthly',  '68,000');
-    var desc       = getParam('desc',     '대인 무한 / 대물 2억 / 자손 5천만 / 자차 포함');
-    var discount   = getParam('discount', '마일리지 할인 적용');
-    var tag        = getParam('tag',      '인기');
-    var badgeColor = getParam('badge_color', '#1a6bc4');
+    try {
+      var insurer    = getParam('insurer',  'KB손해보험');
+      var product    = getParam('product',  'KB손해보험 다이렉트 자동차보험');
+      var monthly    = getParam('monthly',  '68,000');
+      var desc       = getParam('desc',     '대인 무한 / 대물 2억 / 자손 5천만 / 자차 포함');
+      var discount   = getParam('discount', '마일리지 할인 적용');
+      var tag        = getParam('tag',      '인기');
+      var badgeColor = getParam('badge_color', '#1a6bc4');
 
-    document.getElementById('heroBadge').textContent    = tag;
-    document.getElementById('heroInsurer').textContent  = insurer;
-    document.getElementById('heroProduct').textContent  = product;
-    document.getElementById('heroPrice').innerHTML      = monthly + '<span>원</span>';
-    document.getElementById('heroDiscount').textContent = discount;
+      document.getElementById('heroBadge').textContent    = tag;
+      document.getElementById('heroInsurer').textContent  = insurer;
+      document.getElementById('heroProduct').textContent  = product;
+      document.getElementById('heroPrice').innerHTML      = monthly + '<span>원</span>';
+      document.getElementById('heroDiscount').textContent = discount;
 
-    var colorMap = {
-      '#c0392b': 'red', '#1a6bc4': 'blue', '#e67e00': 'orange',
-      '#27ae60': 'green', '#16a085': 'teal', '#8e44ad': 'purple',
-      '#2c3e50': 'dark',  '#e74c3c': 'crimson'
-    };
-    document.body.classList.add('color-' + (colorMap[badgeColor] || 'blue'));
-    document.getElementById('heroBadge').style.background = badgeColor;
+      var colorMap = {
+        '#c0392b': 'red', '#1a6bc4': 'blue', '#e67e00': 'orange',
+        '#27ae60': 'green', '#16a085': 'teal', '#8e44ad': 'purple',
+        '#2c3e50': 'dark',  '#e74c3c': 'crimson'
+      };
+      document.body.classList.add('color-' + (colorMap[badgeColor] || 'blue'));
+      document.getElementById('heroBadge').style.background = badgeColor;
 
-    var coverageTable = document.getElementById('coverageTable');
-    var parts = desc.split(' / ');
-    var labels = ['대인배상', '대물배상', '자동차상해', '자기차량손해'];
-    parts.forEach(function(part, i) {
-      var tr = document.createElement('tr');
-      var included = part.indexOf('미포함') === -1;
-      tr.innerHTML =
-        '<td>' + (labels[i] || '') + '</td>' +
-        '<td class="' + (included ? 'included' : 'not-included') + '">' +
-          (included ? '✓ ' : '✗ ') + part.replace('자차 포함','포함').replace('자차 미포함','미포함') +
-        '</td>';
-      coverageTable.appendChild(tr);
-    });
+      var coverageTable = document.getElementById('coverageTable');
+      var parts = desc.split(' / ');
+      var labels = ['대인배상', '대물배상', '자동차상해', '자기차량손해'];
+      parts.forEach(function(part, i) {
+        var tr = document.createElement('tr');
+        var included = part.indexOf('미포함') === -1;
+        tr.innerHTML =
+          '<td>' + (labels[i] || '') + '</td>' +
+          '<td class="' + (included ? 'included' : 'not-included') + '">' +
+            (included ? '✓ ' : '✗ ') + part.replace('자차 포함','포함').replace('자차 미포함','미포함') +
+          '</td>';
+        coverageTable.appendChild(tr);
+      });
 
-    var discountList = document.getElementById('discountList');
-    var discounts = [
-      { icon: '🎯', text: discount },
-      { icon: '📱', text: '온라인 다이렉트 가입 시 대면 채널 대비 평균 15% 저렴' },
-      { icon: '🔒', text: '가입 후 1년간 보험료 동결 보장' },
-      { icon: '🚘', text: '무사고 시 다음 해 보험료 할인 자동 적용' },
-    ];
-    discounts.forEach(function(d) {
-      var li = document.createElement('li');
-      li.innerHTML = '<span class="discount-icon">' + d.icon + '</span><span class="discount-text">' + d.text + '</span>';
-      discountList.appendChild(li);
-    });
+      var discountList = document.getElementById('discountList');
+      var discounts = [
+        { icon: '🎯', text: discount },
+        { icon: '📱', text: '온라인 다이렉트 가입 시 대면 채널 대비 평균 15% 저렴' },
+        { icon: '🔒', text: '가입 후 1년간 보험료 동결 보장' },
+        { icon: '🚘', text: '무사고 시 다음 해 보험료 할인 자동 적용' },
+      ];
+      discounts.forEach(function(d) {
+        var li = document.createElement('li');
+        li.innerHTML = '<span class="discount-icon">' + d.icon + '</span><span class="discount-text">' + d.text + '</span>';
+        discountList.appendChild(li);
+      });
+    } catch(e) {
+      console.error('param parse error', e);
+    }
 
     function apply() {
       var params = new URLSearchParams(location.search).toString();
