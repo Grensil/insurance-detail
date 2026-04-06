@@ -8,17 +8,6 @@
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     body { font-family: -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #f5f6f8; color: #222; }
 
-    /* 헤더 */
-    .header {
-      position: sticky; top: 0; z-index: 100;
-      background: #fff; height: 52px;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 16px;
-      border-bottom: 1px solid #eee;
-    }
-    .header-btn { font-size: 22px; color: #333; background: none; border: none; cursor: pointer; padding: 6px; }
-    .header-title { font-size: 15px; font-weight: bold; color: #222; }
-
     /* 상단 히어로 */
     .hero {
       background: linear-gradient(135deg, #1a6bc4 0%, #0d4a94 100%);
@@ -110,13 +99,6 @@
 </head>
 <body>
 
-  <!-- 헤더 -->
-  <div class="header">
-    <button class="header-btn" onclick="window.close()">&#8592;</button>
-    <span class="header-title" id="headerTitle">보험 상품 상세</span>
-    <button class="header-btn" onclick="share()">&#8679;</button>
-  </div>
-
   <!-- 히어로 -->
   <div class="hero">
     <div class="hero-badge" id="heroBadge">인기</div>
@@ -181,7 +163,6 @@
     document.getElementById('heroProduct').textContent  = product;
     document.getElementById('heroPrice').innerHTML      = monthly + '<span>원</span>';
     document.getElementById('heroDiscount').textContent = discount;
-    document.getElementById('headerTitle').textContent  = insurer;
 
     // 배지 색상 → 히어로 그라디언트 클래스 매핑
     var colorMap = {
