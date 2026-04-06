@@ -6,221 +6,188 @@
   <title>카링 친구초대 이벤트</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    body { font-family: -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #f0f4ff; color: #222; }
+    body { font-family: -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #f4f6fb; color: #1a1a2e; }
 
     /* 히어로 */
     .hero {
-      background: linear-gradient(160deg, #1a6bc4 0%, #0d3a7a 100%);
-      padding: 48px 24px 60px;
-      text-align: center;
-      color: white;
-      position: relative;
-      overflow: hidden;
+      background: linear-gradient(145deg, #1f6fff 0%, #0a3bb5 100%);
+      padding: 52px 24px 72px;
+      text-align: center; color: white;
+      position: relative; overflow: hidden;
     }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -60px; right: -60px;
-      width: 220px; height: 220px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.06);
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -40px; left: -40px;
-      width: 160px; height: 160px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.05);
-    }
-    .hero-label {
-      display: inline-block;
-      font-size: 12px; font-weight: bold;
-      background: rgba(255,255,255,0.2);
-      border-radius: 20px;
-      padding: 4px 14px;
-      margin-bottom: 18px;
-      letter-spacing: 1px;
-    }
-    .hero-title {
-      font-size: 28px; font-weight: 900;
-      line-height: 1.35;
-      margin-bottom: 12px;
-    }
-    .hero-title em { color: #ffd84d; font-style: normal; }
-    .hero-sub {
-      font-size: 14px; opacity: 0.85; line-height: 1.6;
-    }
-    .hero-reward {
-      margin-top: 28px;
-      background: rgba(255,255,255,0.15);
-      border-radius: 16px;
-      padding: 18px 20px;
-      display: flex; align-items: center; justify-content: center; gap: 12px;
-    }
-    .hero-reward .icon { font-size: 32px; }
-    .hero-reward-text { text-align: left; }
-    .hero-reward-text strong { font-size: 20px; font-weight: 900; display: block; }
-    .hero-reward-text span { font-size: 12px; opacity: 0.8; }
+    .hero-deco { position: absolute; border-radius: 50%; }
+    .hero-deco.d1 { width: 260px; height: 260px; top: -100px; right: -80px; background: rgba(255,255,255,0.07); }
+    .hero-deco.d2 { width: 160px; height: 160px; bottom: -60px; left: -40px; background: rgba(255,255,255,0.05); }
+    .hero-deco.d3 { width: 80px; height: 80px; top: 30px; left: 30px; background: rgba(255,255,255,0.06); }
 
-    /* 본문 */
-    .section {
-      padding: 28px 20px;
+    .hero-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.18); border-radius: 999px;
+      padding: 6px 16px; font-size: 12px; font-weight: 700;
+      margin-bottom: 20px; letter-spacing: 0.5px;
     }
-    .section-title {
-      font-size: 17px; font-weight: bold; color: #1a6bc4;
-      margin-bottom: 16px;
-      display: flex; align-items: center; gap: 6px;
+    .hero-title { font-size: 32px; font-weight: 900; line-height: 1.25; margin-bottom: 10px; }
+    .hero-title em { color: #ffd84d; font-style: normal; }
+    .hero-desc { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.65; }
+
+    .hero-card {
+      margin: 28px auto 0;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 20px 24px;
+      display: flex; align-items: center; gap: 16px;
+      text-align: left;
+      border: 1px solid rgba(255,255,255,0.2);
     }
+    .hero-card-icon { font-size: 36px; flex-shrink: 0; }
+    .hero-card-label { font-size: 12px; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
+    .hero-card-value { font-size: 24px; font-weight: 900; }
+    .hero-card-value span { font-size: 14px; font-weight: 500; }
+
+    /* 공통 섹션 */
+    .section { padding: 28px 20px; }
+    .section-header {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 17px; font-weight: 800; color: #1a1a2e;
+      margin-bottom: 18px;
+    }
+    .section-header .icon { font-size: 20px; }
 
     /* 스텝 */
-    .steps { display: flex; flex-direction: column; gap: 14px; }
+    .steps { display: flex; flex-direction: column; gap: 12px; }
     .step {
-      display: flex; align-items: flex-start; gap: 14px;
-      background: white; border-radius: 14px;
-      padding: 16px 18px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      display: flex; gap: 16px; align-items: flex-start;
+      background: white; border-radius: 16px; padding: 16px 18px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
     }
     .step-num {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: #1a6bc4; color: white;
-      font-size: 15px; font-weight: bold;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: linear-gradient(135deg, #1f6fff, #0a3bb5);
+      color: white; font-size: 15px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(31,111,255,0.3);
     }
-    .step-content strong { font-size: 14px; font-weight: bold; display: block; margin-bottom: 3px; }
-    .step-content span { font-size: 12px; color: #888; }
+    .step strong { font-size: 14px; font-weight: 700; display: block; margin-bottom: 3px; color: #1a1a2e; }
+    .step span { font-size: 12px; color: #888; line-height: 1.5; }
 
-    /* 혜택 카드 */
-    .reward-cards { display: flex; gap: 12px; }
+    /* 혜택 */
+    .reward-row { display: flex; gap: 12px; }
     .reward-card {
-      flex: 1; background: white; border-radius: 14px;
-      padding: 18px 14px; text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      flex: 1; background: white; border-radius: 16px;
+      padding: 20px 14px; text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
     }
-    .reward-card .emoji { font-size: 28px; margin-bottom: 8px; }
-    .reward-card strong { font-size: 15px; font-weight: bold; display: block; margin-bottom: 4px; }
-    .reward-card span { font-size: 11px; color: #888; }
-    .reward-card .amount { font-size: 18px; font-weight: 900; color: #1a6bc4; margin-top: 6px; }
+    .reward-card .emoji { font-size: 32px; margin-bottom: 10px; }
+    .reward-card .who { font-size: 12px; color: #888; margin-bottom: 8px; }
+    .reward-card .amount {
+      font-size: 22px; font-weight: 900; color: #1f6fff;
+      margin-bottom: 2px;
+    }
+    .reward-card .unit { font-size: 12px; color: #aaa; }
 
-    /* 초대 코드 */
-    .invite-box {
-      background: white; border-radius: 16px;
-      padding: 22px 20px; text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    /* 초대코드 */
+    .code-box {
+      background: white; border-radius: 20px; padding: 24px 20px;
+      text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
-    .invite-box p { font-size: 13px; color: #888; margin-bottom: 12px; }
-    .invite-code {
-      font-size: 26px; font-weight: 900; letter-spacing: 4px;
-      color: #1a6bc4; margin-bottom: 16px;
+    .code-label { font-size: 13px; color: #888; margin-bottom: 14px; }
+    .code-value {
+      font-size: 30px; font-weight: 900; letter-spacing: 6px;
+      color: #1f6fff; margin-bottom: 18px;
+      padding: 14px; background: #f0f5ff; border-radius: 12px;
     }
-    .invite-btn {
-      width: 100%; padding: 14px;
-      background: #1a6bc4; color: white;
-      border: none; border-radius: 12px;
-      font-size: 15px; font-weight: bold;
-      cursor: pointer;
+    .code-btn {
+      width: 100%; padding: 15px;
+      background: linear-gradient(135deg, #1f6fff, #0a3bb5);
+      color: white; border: none; border-radius: 14px;
+      font-size: 16px; font-weight: 800; cursor: pointer;
+      box-shadow: 0 6px 16px rgba(31,111,255,0.35);
+      letter-spacing: 0.5px;
     }
-    .invite-btn:active { opacity: 0.85; }
+    .code-btn:active { transform: scale(0.98); }
 
     /* 유의사항 */
-    .notice {
-      background: #f8f9fb; border-radius: 12px;
-      padding: 16px 18px;
-    }
-    .notice p { font-size: 12px; color: #aaa; line-height: 1.8; }
-    .notice p::before { content: '· '; }
+    .notice-box { background: #f0f2f7; border-radius: 14px; padding: 18px; }
+    .notice-box p { font-size: 12px; color: #aaa; line-height: 1.9; }
+    .notice-box p::before { content: '· '; }
 
-    /* 구분선 */
-    .divider { height: 8px; background: #eef1f7; }
-
-    /* 하단 여백 */
-    .bottom-space { height: 40px; }
+    .divider { height: 8px; background: #edf0f7; }
+    .bottom-space { height: 48px; }
   </style>
 </head>
 <body>
 
-  <!-- 히어로 -->
   <div class="hero">
-    <div class="hero-label">🎉 친구초대 이벤트</div>
-    <div class="hero-title">친구 초대하고<br><em>현금 리워드</em> 받기</div>
-    <div class="hero-sub">카링 앱을 친구에게 소개하면<br>나도 친구도 함께 혜택을 받아요!</div>
-    <div class="hero-reward">
-      <div class="icon">💰</div>
-      <div class="hero-reward-text">
-        <strong>최대 30,000원</strong>
-        <span>친구 1명 초대 시 나 + 친구 각 5,000원</span>
+    <div class="hero-deco d1"></div>
+    <div class="hero-deco d2"></div>
+    <div class="hero-deco d3"></div>
+    <div class="hero-chip">🎉 친구초대 이벤트</div>
+    <div class="hero-title">친구 초대하고<br><em>최대 30,000원</em> 받기</div>
+    <div class="hero-desc">카링 앱을 친구에게 소개하면<br>나도 친구도 함께 혜택을 받아요!</div>
+    <div class="hero-card">
+      <div class="hero-card-icon">💰</div>
+      <div>
+        <div class="hero-card-label">친구 1명 초대 시 각각</div>
+        <div class="hero-card-value">5,000<span>원 지급</span></div>
       </div>
     </div>
   </div>
 
-  <!-- 참여 방법 -->
   <div class="section">
-    <div class="section-title">📋 참여 방법</div>
+    <div class="section-header"><span class="icon">📋</span> 참여 방법</div>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
-        <div class="step-content">
-          <strong>내 초대 코드 공유</strong>
-          <span>아래 초대 코드를 친구에게 카카오톡으로 공유하세요</span>
-        </div>
+        <div><strong>내 초대 코드 공유</strong><span>아래 초대 코드를 친구에게 카카오톡으로 공유하세요</span></div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <div class="step-content">
-          <strong>친구가 카링 앱 가입</strong>
-          <span>친구가 내 코드로 카링 앱에 가입하면 인증 완료</span>
-        </div>
+        <div><strong>친구가 카링 앱 가입</strong><span>친구가 내 코드로 카링 앱에 가입하면 인증 완료</span></div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
-        <div class="step-content">
-          <strong>리워드 자동 지급</strong>
-          <span>가입 확인 후 3영업일 이내에 포인트가 지급돼요</span>
-        </div>
+        <div><strong>리워드 자동 지급</strong><span>가입 확인 후 3영업일 이내 포인트 지급</span></div>
       </div>
     </div>
   </div>
 
   <div class="divider"></div>
 
-  <!-- 혜택 -->
   <div class="section">
-    <div class="section-title">🎁 혜택 안내</div>
-    <div class="reward-cards">
+    <div class="section-header"><span class="icon">🎁</span> 혜택 안내</div>
+    <div class="reward-row">
       <div class="reward-card">
         <div class="emoji">🙋</div>
-        <strong>초대한 나</strong>
-        <span>친구 1명당</span>
-        <div class="amount">+5,000원</div>
+        <div class="who">초대한 나</div>
+        <div class="amount">+5,000</div>
+        <div class="unit">친구 1명당</div>
       </div>
       <div class="reward-card">
         <div class="emoji">👥</div>
-        <strong>초대받은 친구</strong>
-        <span>가입 완료 시</span>
-        <div class="amount">+5,000원</div>
+        <div class="who">초대받은 친구</div>
+        <div class="amount">+5,000</div>
+        <div class="unit">가입 완료 시</div>
       </div>
     </div>
   </div>
 
   <div class="divider"></div>
 
-  <!-- 초대 코드 -->
   <div class="section">
-    <div class="section-title">🔗 내 초대 코드</div>
-    <div class="invite-box">
-      <p>아래 코드를 친구에게 공유하세요</p>
-      <div class="invite-code" id="inviteCode">CARING01</div>
-      <button class="invite-btn" onclick="copyCode()">초대 코드 복사하기</button>
+    <div class="section-header"><span class="icon">🔗</span> 내 초대 코드</div>
+    <div class="code-box">
+      <div class="code-label">아래 코드를 친구에게 공유하세요</div>
+      <div class="code-value" id="inviteCode">CARING01</div>
+      <button class="code-btn" onclick="copyCode()">초대 코드 복사하기</button>
     </div>
   </div>
 
   <div class="divider"></div>
 
-  <!-- 유의사항 -->
   <div class="section">
-    <div class="section-title" style="color:#aaa; font-size:14px;">유의사항</div>
-    <div class="notice">
+    <div class="section-header" style="color:#bbb; font-size:14px;">유의사항</div>
+    <div class="notice-box">
       <p>이벤트는 사전 고지 없이 변경 또는 종료될 수 있습니다.</p>
       <p>부정 참여가 확인될 경우 리워드가 취소될 수 있습니다.</p>
       <p>리워드는 카링 앱 내 포인트로 지급됩니다.</p>
@@ -234,16 +201,11 @@
     function copyCode() {
       var code = document.getElementById('inviteCode').innerText;
       if (navigator.clipboard) {
-        navigator.clipboard.writeText(code).then(function() {
-          alert('초대 코드가 복사되었습니다!');
-        });
+        navigator.clipboard.writeText(code).then(function() { alert('초대 코드가 복사되었습니다!'); });
       } else {
         var el = document.createElement('textarea');
-        el.value = code;
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
+        el.value = code; document.body.appendChild(el); el.select();
+        document.execCommand('copy'); document.body.removeChild(el);
         alert('초대 코드가 복사되었습니다!');
       }
     }

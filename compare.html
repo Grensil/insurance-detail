@@ -6,115 +6,126 @@
   <title>자동차보험 비교견적</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    body { font-family: -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #f0f8f2; color: #222; }
+    body { font-family: -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #f4f9f6; color: #1a1a2e; }
 
     .hero {
-      background: linear-gradient(160deg, #27ae60 0%, #1a7a42 100%);
-      padding: 48px 24px 60px;
-      text-align: center;
-      color: white;
-      position: relative;
-      overflow: hidden;
+      background: linear-gradient(145deg, #00b876 0%, #007a4d 100%);
+      padding: 52px 24px 72px;
+      text-align: center; color: white;
+      position: relative; overflow: hidden;
     }
-    .hero::before {
-      content: '';
-      position: absolute; top: -60px; right: -60px;
-      width: 220px; height: 220px; border-radius: 50%;
-      background: rgba(255,255,255,0.06);
+    .hero-deco { position: absolute; border-radius: 50%; }
+    .hero-deco.d1 { width: 260px; height: 260px; top: -100px; right: -80px; background: rgba(255,255,255,0.07); }
+    .hero-deco.d2 { width: 160px; height: 160px; bottom: -60px; left: -40px; background: rgba(255,255,255,0.05); }
+
+    .hero-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.18); border-radius: 999px;
+      padding: 6px 16px; font-size: 12px; font-weight: 700;
+      margin-bottom: 20px; letter-spacing: 0.5px;
     }
-    .hero-label {
-      display: inline-block; font-size: 12px; font-weight: bold;
-      background: rgba(255,255,255,0.2); border-radius: 20px;
-      padding: 4px 14px; margin-bottom: 18px; letter-spacing: 1px;
-    }
-    .hero-title { font-size: 28px; font-weight: 900; line-height: 1.35; margin-bottom: 12px; }
-    .hero-title em { color: #a8f0c0; font-style: normal; }
-    .hero-sub { font-size: 14px; opacity: 0.85; line-height: 1.6; }
-    .hero-stat {
-      margin-top: 28px; background: rgba(255,255,255,0.15);
-      border-radius: 16px; padding: 18px 20px;
+    .hero-title { font-size: 32px; font-weight: 900; line-height: 1.25; margin-bottom: 10px; }
+    .hero-title em { color: #ffe066; font-style: normal; }
+    .hero-desc { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.65; }
+
+    .hero-stats {
+      margin-top: 28px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px; padding: 20px;
       display: flex; justify-content: space-around;
+      border: 1px solid rgba(255,255,255,0.2);
     }
-    .stat-item { text-align: center; }
-    .stat-item strong { font-size: 22px; font-weight: 900; display: block; }
-    .stat-item span { font-size: 11px; opacity: 0.8; }
+    .stat { text-align: center; }
+    .stat strong { font-size: 22px; font-weight: 900; display: block; }
+    .stat span { font-size: 11px; color: rgba(255,255,255,0.75); margin-top: 2px; display: block; }
+    .stat-divider { width: 1px; background: rgba(255,255,255,0.2); }
 
     .section { padding: 28px 20px; }
-    .section-title { font-size: 17px; font-weight: bold; color: #27ae60; margin-bottom: 16px; }
+    .section-header {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 17px; font-weight: 800; color: #1a1a2e; margin-bottom: 18px;
+    }
 
-    .insurer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .insurer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .insurer-card {
-      background: white; border-radius: 14px; padding: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      background: white; border-radius: 14px; padding: 14px 16px;
       display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
-    .insurer-icon {
-      width: 40px; height: 40px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; flex-shrink: 0;
+    .ins-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
     }
-    .insurer-card strong { font-size: 13px; font-weight: bold; display: block; }
-    .insurer-card span { font-size: 11px; color: #888; }
+    .insurer-card strong { font-size: 13px; font-weight: 700; display: block; color: #1a1a2e; }
+    .insurer-card span { font-size: 11px; color: #aaa; }
 
     .benefit-list { display: flex; flex-direction: column; gap: 12px; }
     .benefit-item {
-      background: white; border-radius: 14px; padding: 16px 18px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      display: flex; align-items: center; gap: 14px;
+      background: white; border-radius: 16px; padding: 18px;
+      display: flex; align-items: center; gap: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
-    .benefit-item .icon { font-size: 24px; flex-shrink: 0; }
-    .benefit-item strong { font-size: 14px; font-weight: bold; display: block; margin-bottom: 3px; }
-    .benefit-item span { font-size: 12px; color: #888; }
+    .benefit-icon {
+      width: 44px; height: 44px; border-radius: 14px;
+      background: #f0faf5; display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+    }
+    .benefit-item strong { font-size: 14px; font-weight: 700; display: block; margin-bottom: 4px; }
+    .benefit-item span { font-size: 12px; color: #888; line-height: 1.5; }
 
     .cta-btn {
-      display: block; width: calc(100% - 40px); margin: 0 20px 40px;
-      padding: 16px; background: #27ae60; color: white;
-      border: none; border-radius: 14px; font-size: 16px; font-weight: bold;
-      text-align: center; cursor: pointer;
+      display: block; width: calc(100% - 40px); margin: 0 20px 44px;
+      padding: 16px; background: linear-gradient(135deg, #00b876, #007a4d);
+      color: white; border: none; border-radius: 14px;
+      font-size: 16px; font-weight: 800; text-align: center; cursor: pointer;
+      box-shadow: 0 6px 16px rgba(0,184,118,0.35);
     }
-    .cta-btn:active { opacity: 0.85; }
-    .divider { height: 8px; background: #eef5f1; }
+    .cta-btn:active { transform: scale(0.98); }
+    .divider { height: 8px; background: #edf5f0; }
   </style>
 </head>
 <body>
 
   <div class="hero">
-    <div class="hero-label">🚗 자동차보험 비교</div>
+    <div class="hero-deco d1"></div>
+    <div class="hero-deco d2"></div>
+    <div class="hero-chip">🚗 자동차보험 비교</div>
     <div class="hero-title">8개 보험사<br><em>한번에 비교</em>하기</div>
-    <div class="hero-sub">카링이 내 차에 맞는<br>최저가 보험을 찾아드려요</div>
-    <div class="hero-stat">
-      <div class="stat-item"><strong>8개사</strong><span>제휴 보험사</span></div>
-      <div class="stat-item"><strong>평균 23%</strong><span>절감 효과</span></div>
-      <div class="stat-item"><strong>3분</strong><span>비교 완료</span></div>
+    <div class="hero-desc">카링이 내 차에 맞는<br>최저가 보험을 찾아드려요</div>
+    <div class="hero-stats">
+      <div class="stat"><strong>8개사</strong><span>제휴 보험사</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><strong>평균 23%</strong><span>절감 효과</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><strong>3분</strong><span>비교 완료</span></div>
     </div>
   </div>
 
   <div class="section">
-    <div class="section-title">🏢 제휴 보험사</div>
+    <div class="section-header"><span>🏢</span> 제휴 보험사</div>
     <div class="insurer-grid">
-      <div class="insurer-card"><div class="insurer-icon" style="background:#fef0f0;">🔴</div><div><strong>삼성화재</strong><span>애니카다이렉트</span></div></div>
-      <div class="insurer-card"><div class="insurer-icon" style="background:#fff5e6;">🟠</div><div><strong>현대해상</strong><span>하이카다이렉트</span></div></div>
-      <div class="insurer-card"><div class="insurer-icon" style="background:#f0f4ff;">🔵</div><div><strong>KB손해보험</strong><span>KB다이렉트</span></div></div>
-      <div class="insurer-card"><div class="insurer-icon" style="background:#f0fff4;">🟢</div><div><strong>DB손해보험</strong><span>프로미다이렉트</span></div></div>
-      <div class="insurer-card"><div class="insurer-icon" style="background:#f5f0ff;">🟣</div><div><strong>MG손해보험</strong><span>온라인전용</span></div></div>
-      <div class="insurer-card"><div class="insurer-icon" style="background:#fff0f5;">🩷</div><div><strong>메리츠화재</strong><span>메리츠다이렉트</span></div></div>
-      <div class="insurer-card"><div class="insurer-icon" style="background:#fff8e6;">🟡</div><div><strong>한화손해보험</strong><span>한화다이렉트</span></div></div>
-      <div class="insurer-card"><div class="insurer-icon" style="background:#f0f4ff;">⚫</div><div><strong>AXA손해보험</strong><span>AXA다이렉트</span></div></div>
+      <div class="insurer-card"><div class="ins-icon" style="background:#fff0f0;">🔴</div><div><strong>삼성화재</strong><span>애니카다이렉트</span></div></div>
+      <div class="insurer-card"><div class="ins-icon" style="background:#fff5e6;">🟠</div><div><strong>현대해상</strong><span>하이카다이렉트</span></div></div>
+      <div class="insurer-card"><div class="ins-icon" style="background:#f0f4ff;">🔵</div><div><strong>KB손해보험</strong><span>KB다이렉트</span></div></div>
+      <div class="insurer-card"><div class="ins-icon" style="background:#f0fff4;">🟢</div><div><strong>DB손해보험</strong><span>프로미다이렉트</span></div></div>
+      <div class="insurer-card"><div class="ins-icon" style="background:#f5f0ff;">🟣</div><div><strong>MG손해보험</strong><span>온라인전용</span></div></div>
+      <div class="insurer-card"><div class="ins-icon" style="background:#f0fff9;">🩵</div><div><strong>메리츠화재</strong><span>메리츠다이렉트</span></div></div>
+      <div class="insurer-card"><div class="ins-icon" style="background:#fff8e6;">🟡</div><div><strong>한화손해보험</strong><span>한화다이렉트</span></div></div>
+      <div class="insurer-card"><div class="ins-icon" style="background:#f2f4f7;">⚫</div><div><strong>AXA손해보험</strong><span>AXA다이렉트</span></div></div>
     </div>
   </div>
 
   <div class="divider"></div>
 
   <div class="section">
-    <div class="section-title">✅ 카링 비교의 장점</div>
+    <div class="section-header"><span>✅</span> 카링 비교의 장점</div>
     <div class="benefit-list">
-      <div class="benefit-item"><div class="icon">⚡</div><div><strong>빠른 비교</strong><span>차량 정보 자동 입력으로 3분 안에 비교 완료</span></div></div>
-      <div class="benefit-item"><div class="icon">💰</div><div><strong>최저가 보장</strong><span>8개 보험사 실시간 견적으로 최저가 상품 추천</span></div></div>
-      <div class="benefit-item"><div class="icon">🔒</div><div><strong>개인정보 보호</strong><span>비교 후 정보는 즉시 삭제, 마케팅 활용 없음</span></div></div>
+      <div class="benefit-item"><div class="benefit-icon">⚡</div><div><strong>빠른 비교</strong><span>차량 정보 자동 입력으로 3분 안에 비교 완료</span></div></div>
+      <div class="benefit-item"><div class="benefit-icon">💰</div><div><strong>최저가 보장</strong><span>8개 보험사 실시간 견적으로 최저가 상품 추천</span></div></div>
+      <div class="benefit-item"><div class="benefit-icon">🔒</div><div><strong>개인정보 보호</strong><span>비교 후 정보는 즉시 삭제, 마케팅 활용 없음</span></div></div>
     </div>
   </div>
-
-  <div class="divider"></div>
 
   <div style="height:20px;"></div>
   <button class="cta-btn" onclick="window.close()">지금 바로 비교하기</button>
