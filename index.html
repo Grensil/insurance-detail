@@ -8,6 +8,26 @@
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     body { font-family: -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #f5f6f8; color: #222; }
 
+    /* 헤더 */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: #fff; height: 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 4px 0 0;
+      border-bottom: 1px solid #eee;
+    }
+    .header-nav { display: flex; align-items: center; }
+    .header-btn {
+      font-size: 20px; color: #333; background: none; border: none;
+      cursor: pointer; padding: 10px 12px; line-height: 1;
+    }
+    .header-btn:disabled { color: #ccc; }
+    .header-close {
+      font-size: 13px; font-weight: bold; color: #333;
+      background: none; border: none; cursor: pointer;
+      padding: 10px 14px;
+    }
+
     /* 상단 히어로 */
     .hero {
       background: linear-gradient(135deg, #1a6bc4 0%, #0d4a94 100%);
@@ -33,14 +53,11 @@
     .hero-discount::before { content: "✓  "; }
 
     /* 섹션 공통 */
-    .section {
-      background: #fff; margin: 10px 0; padding: 20px 16px;
-    }
+    .section { background: #fff; margin: 10px 0; padding: 20px 16px; }
     .section-title {
       font-size: 14px; font-weight: bold; color: #111;
       margin-bottom: 14px; padding-bottom: 10px;
-      border-bottom: 2px solid #1a6bc4;
-      display: inline-block;
+      border-bottom: 2px solid #1a6bc4; display: inline-block;
     }
 
     /* 보장 내역 테이블 */
@@ -67,37 +84,59 @@
     .notice { background: #f8f9fa; border-radius: 8px; padding: 14px; }
     .notice p { font-size: 11px; color: #999; line-height: 1.7; }
 
+    /* 문의 배너 */
+    .inquiry-banner {
+      background: #fff; margin: 10px 0; padding: 16px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .inquiry-banner-text { font-size: 13px; color: #555; }
+    .inquiry-banner-text strong { display: block; font-size: 14px; color: #222; margin-bottom: 2px; }
+    .inquiry-btns { display: flex; gap: 8px; }
+    .btn-call {
+      padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: bold;
+      cursor: pointer; border: 1.5px solid #1a6bc4; background: #fff; color: #1a6bc4;
+      text-decoration: none; display: flex; align-items: center; gap: 4px;
+    }
+    .btn-sms {
+      padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: bold;
+      cursor: pointer; border: none; background: #1a6bc4; color: white;
+      text-decoration: none; display: flex; align-items: center; gap: 4px;
+    }
+
     /* 바텀 CTA */
     .bottom-cta {
       position: fixed; bottom: 0; left: 0; right: 0;
       background: #fff; padding: 12px 16px;
       border-top: 1px solid #eee;
-      display: flex; gap: 10px;
-    }
-    .btn-inquiry {
-      flex: 1; padding: 15px; border-radius: 10px;
-      font-size: 15px; font-weight: bold; cursor: pointer;
-      border: 2px solid #1a6bc4; background: #fff; color: #1a6bc4;
     }
     .btn-apply {
-      flex: 2; padding: 15px; border-radius: 10px;
-      font-size: 15px; font-weight: bold; cursor: pointer;
+      width: 100%; padding: 15px; border-radius: 10px;
+      font-size: 16px; font-weight: bold; cursor: pointer;
       border: none; background: #1a6bc4; color: white;
     }
     .bottom-spacer { height: 80px; }
 
     /* 태그별 히어로 컬러 */
-    body.color-red    .hero { background: linear-gradient(135deg, #c0392b 0%, #922b21 100%); }
-    body.color-blue   .hero { background: linear-gradient(135deg, #1a6bc4 0%, #0d4a94 100%); }
-    body.color-orange .hero { background: linear-gradient(135deg, #e67e00 0%, #b35e00 100%); }
-    body.color-green  .hero { background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%); }
-    body.color-teal   .hero { background: linear-gradient(135deg, #16a085 0%, #0e6655 100%); }
-    body.color-purple .hero { background: linear-gradient(135deg, #8e44ad 0%, #6c3483 100%); }
-    body.color-dark   .hero { background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%); }
+    body.color-red     .hero { background: linear-gradient(135deg, #c0392b 0%, #922b21 100%); }
+    body.color-blue    .hero { background: linear-gradient(135deg, #1a6bc4 0%, #0d4a94 100%); }
+    body.color-orange  .hero { background: linear-gradient(135deg, #e67e00 0%, #b35e00 100%); }
+    body.color-green   .hero { background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%); }
+    body.color-teal    .hero { background: linear-gradient(135deg, #16a085 0%, #0e6655 100%); }
+    body.color-purple  .hero { background: linear-gradient(135deg, #8e44ad 0%, #6c3483 100%); }
+    body.color-dark    .hero { background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%); }
     body.color-crimson .hero { background: linear-gradient(135deg, #e74c3c 0%, #b03a2e 100%); }
   </style>
 </head>
 <body>
+
+  <!-- 헤더 -->
+  <div class="header">
+    <div class="header-nav">
+      <button class="header-btn" onclick="history.back()">&#8249;</button>
+      <button class="header-btn" onclick="history.forward()">&#8250;</button>
+    </div>
+    <button class="header-close" onclick="closeWebView()">닫기</button>
+  </div>
 
   <!-- 히어로 -->
   <div class="hero">
@@ -134,16 +173,26 @@
     </div>
   </div>
 
+  <!-- 문의 배너 -->
+  <div class="inquiry-banner">
+    <div class="inquiry-banner-text">
+      <strong>전문 설계사 상담</strong>
+      평일 09:00 ~ 18:00
+    </div>
+    <div class="inquiry-btns">
+      <a class="btn-call" href="tel:01077002852">📞 전화</a>
+      <a class="btn-sms" href="sms:01077002852">💬 문자</a>
+    </div>
+  </div>
+
   <div class="bottom-spacer"></div>
 
   <!-- 바텀 CTA -->
   <div class="bottom-cta">
-    <button class="btn-inquiry" onclick="inquiry()">문의하기</button>
     <button class="btn-apply" onclick="apply()">보험 가입하기</button>
   </div>
 
   <script>
-    // URL 파라미터 파싱
     function getParam(key, fallback) {
       var val = new URLSearchParams(location.search).get(key);
       return val !== null ? decodeURIComponent(val) : fallback;
@@ -157,40 +206,34 @@
     var tag        = getParam('tag',      '인기');
     var badgeColor = getParam('badge_color', '#1a6bc4');
 
-    // 히어로 채우기
     document.getElementById('heroBadge').textContent    = tag;
     document.getElementById('heroInsurer').textContent  = insurer;
     document.getElementById('heroProduct').textContent  = product;
     document.getElementById('heroPrice').innerHTML      = monthly + '<span>원</span>';
     document.getElementById('heroDiscount').textContent = discount;
 
-    // 배지 색상 → 히어로 그라디언트 클래스 매핑
     var colorMap = {
       '#c0392b': 'red', '#1a6bc4': 'blue', '#e67e00': 'orange',
       '#27ae60': 'green', '#16a085': 'teal', '#8e44ad': 'purple',
       '#2c3e50': 'dark',  '#e74c3c': 'crimson'
     };
-    var cls = colorMap[badgeColor] || 'blue';
-    document.body.classList.add('color-' + cls);
+    document.body.classList.add('color-' + (colorMap[badgeColor] || 'blue'));
     document.getElementById('heroBadge').style.background = badgeColor;
 
-    // 보장 내역 파싱 (ex: "대인 무한 / 대물 2억 / 자손 5천만 / 자차 포함")
     var coverageTable = document.getElementById('coverageTable');
     var parts = desc.split(' / ');
     var labels = ['대인배상', '대물배상', '자동차상해', '자기차량손해'];
     parts.forEach(function(part, i) {
       var tr = document.createElement('tr');
       var included = part.indexOf('미포함') === -1;
-      var valueClass = included ? 'included' : 'not-included';
       tr.innerHTML =
         '<td>' + (labels[i] || '') + '</td>' +
-        '<td class="' + valueClass + '">' +
+        '<td class="' + (included ? 'included' : 'not-included') + '">' +
           (included ? '✓ ' : '✗ ') + part.replace('자차 포함','포함').replace('자차 미포함','미포함') +
         '</td>';
       coverageTable.appendChild(tr);
     });
 
-    // 할인 혜택
     var discountList = document.getElementById('discountList');
     var discounts = [
       { icon: '🎯', text: discount },
@@ -204,15 +247,14 @@
       discountList.appendChild(li);
     });
 
-    function share() {
-      if (navigator.share) {
-        navigator.share({ title: product, text: insurer + ' 월 ' + monthly + '원', url: location.href });
-      } else {
-        alert('링크가 복사되었습니다.\n' + location.href);
-      }
+    function apply() {
+      var params = new URLSearchParams(location.search).toString();
+      location.href = 'terms.html' + (params ? '?' + params : '');
     }
-    function inquiry()  { alert('담당 설계사에게 연결합니다.'); }
-    function apply()    { alert('보험사 가입 페이지로 이동합니다.'); }
+
+    function closeWebView() {
+      try { webkit.messageHandlers.cordova_iab.postMessage(JSON.stringify({ action: 'close' })); } catch(e) { window.close(); }
+    }
   </script>
 </body>
 </html>
