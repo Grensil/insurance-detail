@@ -36,22 +36,22 @@
 
     /* 전체 동의 */
     .agree-all {
-      background: #fff; margin: 10px 0 0; padding: 16px;
+      background: #fff; margin: 10px 0 0; padding: 6px 16px;
       display: flex; align-items: center; gap: 12px;
       border-bottom: 6px solid #f5f6f8;
     }
-    .agree-all label { font-size: 15px; font-weight: bold; color: #111; cursor: pointer; flex: 1; }
+    .agree-all label { font-size: 15px; font-weight: bold; color: #111; cursor: pointer; flex: 1; padding: 14px 0; }
 
     /* 약관 목록 */
     .terms-list { background: #fff; }
     .term-item {
-      padding: 14px 16px;
+      padding: 6px 16px;
       border-bottom: 1px solid #f5f5f5;
       display: flex; align-items: center; gap: 12px;
     }
     .term-item:last-child { border-bottom: none; }
     .term-info { flex: 1; }
-    .term-info label { font-size: 14px; color: #333; cursor: pointer; display: block; margin-bottom: 2px; }
+    .term-info label { font-size: 14px; color: #333; cursor: pointer; display: block; padding: 12px 0; }
     .term-info .term-badge {
       font-size: 11px; font-weight: bold;
       padding: 2px 6px; border-radius: 4px; margin-right: 4px;
@@ -60,11 +60,11 @@
     .term-badge.optional { background: #f0f4ff; color: #1a6bc4; }
     .term-view {
       font-size: 12px; color: #aaa; background: none; border: none;
-      cursor: pointer; padding: 4px; white-space: nowrap;
+      cursor: pointer; padding: 12px 4px; white-space: nowrap;
     }
 
     /* 체크박스 커스텀 */
-    .checkbox-wrap { position: relative; width: 22px; height: 22px; flex-shrink: 0; }
+    .checkbox-wrap { position: relative; width: 44px; height: 44px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
     .checkbox-wrap input[type="checkbox"] { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; margin: 0; }
     .checkbox-custom {
       width: 22px; height: 22px; border-radius: 50%;
